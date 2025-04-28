@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor //generate a constructor with all fields
-@NoArgsConstructor //generate a cnstructor with no fields
+@NoArgsConstructor //generate a constructor with no fields
 @Entity
-
 @Data
 @Table(name="urls")
 public class UrlShortened {

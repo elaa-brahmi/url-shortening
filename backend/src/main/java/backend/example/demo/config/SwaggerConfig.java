@@ -9,16 +9,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    @Value("${swagger.api.title:URL Shortener API}")
+    @Value("OpenApi specification")
     private String title;
-
-    @Value("${swagger.api.version:1.0.0}")
+    @Value("1.0")
     private String version;
-
-    @Value("${swagger.api.description:API for shortening URLs}")
+    @Value("OpenApi documentation for shortening urls")
     private String description;
-
-
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -28,7 +24,6 @@ public class SwaggerConfig {
                         .description(description)
                         .contact(new Contact()
                                 .name("API Support")
-
                         )
                 );
     }
