@@ -10,11 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor //generate a constructor with all fields
+@NoArgsConstructor //generate a cnstructor with no fields
 @Entity
-@Getter
-@Setter
+
 @Data
 @Table(name="urls")
 public class UrlShortened {

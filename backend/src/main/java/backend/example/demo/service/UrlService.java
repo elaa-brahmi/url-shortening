@@ -3,6 +3,7 @@ package backend.example.demo.service;
 import backend.example.demo.model.UrlShortened;
 import backend.example.demo.repository.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,11 +40,11 @@ public class UrlService {
     }
     public void createUrl(String  Originalurl){
         String shorturl=generateRandomUrl();
-        UrlShortened newUrl=new UrlShortened();
-        newUrl.builder()
+        UrlShortened newUrl = UrlShortened.builder()
                 .shortenedUrl(shorturl)
                 .originalUrl(Originalurl)
                 .build();
+        urlRepository.save(newUrl);
         urlRepository.save(newUrl);
 
     }
@@ -60,18 +61,19 @@ public class UrlService {
          return original;
     }
 
-    public void updateShortUrl(String originalUrl, String shortenedUrl){
-        Optional<UrlShortened> original =urlRepository.findByShortenedUrl(shortenedUrl);
+    public UrlShortened updateShortUrl(String originalUrl, Integer urlId){
+        Optional<UrlShortened> original =urlRepository.findById(urlId);
         if(original.isPresent()){
             original.get().setOriginalUrl(originalUrl);
             original.get().setUpdatedAt(LocalDateTime.now());
-            urlRepository.save(original.get());
+            return urlRepository.save(original.get());
         }
+        return null;
 
     }
-    public List<UrlShortened> getAllUrls(){
+    public Optional<List<UrlShortened>> getAllUrls(){
         List<UrlShortened> urls=urlRepository.findAll();
-        return urls;
+        return urls.isEmpty()?Optional.empty():Optional.of(urls);
 
     }
     public void deleteUrl(Integer id){
