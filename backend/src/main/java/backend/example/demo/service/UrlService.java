@@ -1,9 +1,11 @@
 package backend.example.demo.service;
 
+import backend.example.demo.exception.NotFoundUrl;
+import backend.example.demo.exception.ShortUrlExist;
+import backend.example.demo.exception.TooManyAttempts;
 import backend.example.demo.model.UrlShortened;
 import backend.example.demo.repository.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,22 +33,38 @@ public class UrlService {
             }
             shorturl=url.toString();
             counter++;
+
             if(counter>6){
-                throw new RuntimeException("failed to generate unique code after 6 attempts");
+                throw new TooManyAttempts("failed to generate unique code after 6 attempts");
             }
 
-        }while(urlRepository.findByShortenedUrl(shorturl)==null);
+
+        }while(urlRepository.findByShortenedUrl(shorturl).isPresent());
         return shorturl;
+
     }
-    public void createUrl(String  Originalurl){
-        String shorturl=generateRandomUrl();
+    public void generateCustomShortenedUrl(String shortenedUrl,String originalUrl){
+        if(urlRepository.findByShortenedUrl(shortenedUrl).isPresent()){
+            throw new ShortUrlExist("this short url already exist, choose another");
+        }
         UrlShortened newUrl = UrlShortened.builder()
-                .shortenedUrl(shorturl)
-                .originalUrl(Originalurl)
+                .shortenedUrl(shortenedUrl)
+                .originalUrl(originalUrl)
+                .accessCount(0)
+                .createdAt(LocalDateTime.now())
                 .build();
         urlRepository.save(newUrl);
-        urlRepository.save(newUrl);
 
+    }
+    public void createUrl(String  Originalurl) throws TooManyAttempts {
+            String shorturl=generateRandomUrl();
+            UrlShortened newUrl = UrlShortened.builder()
+                    .shortenedUrl(shorturl)
+                    .originalUrl(Originalurl)
+                    .accessCount(0)
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            urlRepository.save(newUrl);
     }
     public Optional<UrlShortened> getUrlFromShortenedUrl(String shortenedUrl){
          Optional<UrlShortened> original =urlRepository.findByShortenedUrl(shortenedUrl);
@@ -56,7 +74,7 @@ public class UrlService {
              urlRepository.save(urlShortened);
          }
          else{
-             return Optional.empty();
+             throw new NotFoundUrl("Url not found for shortened url: "+shortenedUrl);
          }
          return original;
     }
@@ -73,7 +91,12 @@ public class UrlService {
     }
     public Optional<List<UrlShortened>> getAllUrls(){
         List<UrlShortened> urls=urlRepository.findAll();
-        return urls.isEmpty()?Optional.empty():Optional.of(urls);
+        if(urls.isEmpty()){
+            throw new NotFoundUrl("no urls found");
+        }
+        else{
+            return Optional.of(urls);
+        }
 
     }
     public void deleteUrl(Integer id){

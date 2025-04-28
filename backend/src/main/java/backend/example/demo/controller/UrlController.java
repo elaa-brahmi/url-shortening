@@ -1,12 +1,16 @@
 package backend.example.demo.controller;
 
+import backend.example.demo.dto.CustomUrlRequest;
+import backend.example.demo.dto.RequestUrl;
+import backend.example.demo.exception.TooManyAttempts;
 import backend.example.demo.model.UrlShortened;
 import backend.example.demo.service.UrlService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.Optional;
         name="URL Shortening APIs",
         description = "APIs for shortening, managing, and resolving URLs. Includes endpoints for creating short URLs, retrieving original URLs, and analyzing URL usage statistics."
 )
+@Validated
 public class UrlController {
     private final UrlService urlService;
 
@@ -29,9 +34,18 @@ public class UrlController {
         return urls.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
     }
+    @PostMapping("/customUrl")
+    @Operation(summary="create a custom short url")
+    public ResponseEntity<Void> createCustomUrl( @Valid @RequestBody CustomUrlRequest customUrl) throws TooManyAttempts {
+        String originalUrl=customUrl.getOriginalUrl();
+        String shortUrl=customUrl.getShortUrl();
+        urlService.generateCustomShortenedUrl(shortUrl,originalUrl);
+        return ResponseEntity.noContent().build();
+    }
     @PostMapping("/create")
     @Operation(summary="create a new url")
-    public ResponseEntity<Void> createUrl(@RequestBody String url){
+    public ResponseEntity<Void> createUrl(@Valid @RequestBody RequestUrl urlrequest) throws TooManyAttempts {
+        String url=urlrequest.getOriginalUrl();
         urlService.createUrl(url);
         return ResponseEntity.noContent().build();
     }
@@ -44,7 +58,9 @@ public class UrlController {
     }
     @PutMapping("/update/{id}")
     @Operation(summary="update an url by it's id")
-    public ResponseEntity<UrlShortened> updateUrl(@PathVariable String id, @RequestBody String url){
+    public ResponseEntity<UrlShortened> updateUrl(@PathVariable String id, @Valid @RequestBody RequestUrl urlrequest){
+        String url=urlrequest.getOriginalUrl();
+
         Integer idInt = Integer.parseInt(id);
         return ResponseEntity.ok(urlService.updateShortUrl(url,idInt));
     }
