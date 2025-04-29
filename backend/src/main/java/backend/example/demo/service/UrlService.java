@@ -52,6 +52,7 @@ public class UrlService {
                 .originalUrl(originalUrl)
                 .accessCount(0)
                 .createdAt(LocalDateTime.now())
+                .type("custom")
                 .build();
         urlRepository.save(newUrl);
 
@@ -62,6 +63,7 @@ public class UrlService {
                     .shortenedUrl(shorturl)
                     .originalUrl(Originalurl)
                     .accessCount(0)
+                    .type("generated")
                     .createdAt(LocalDateTime.now())
                     .build();
             urlRepository.save(newUrl);

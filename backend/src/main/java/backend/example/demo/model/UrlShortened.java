@@ -28,4 +28,5 @@ public class UrlShortened {
     @Column(insertable = false)
     private LocalDateTime updatedAt;
     private Integer accessCount;
+    private String type;
 }
