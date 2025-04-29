@@ -66,6 +66,13 @@ public class UrlService {
                     .build();
             urlRepository.save(newUrl);
     }
+    public void copyUrl(Integer id){
+        UrlShortened url=urlRepository.findById(id).get();
+        url.setAccessCount(url.getAccessCount()+1);
+        urlRepository.save(url);
+
+
+    }
     public Optional<UrlShortened> getUrlFromShortenedUrl(String shortenedUrl){
          Optional<UrlShortened> original =urlRepository.findByShortenedUrl(shortenedUrl);
          if(original.isPresent()){

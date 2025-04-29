@@ -12,10 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor //generates constructor for all fields that are marked as final or are marked with @NonNull
 @RequestMapping("/shorten")
@@ -26,13 +24,18 @@ import java.util.Optional;
 @Validated
 public class UrlController {
     private final UrlService urlService;
-
+@PostMapping("/copy/{id}")
+@Operation(summary="copy url to clipboard")
+public ResponseEntity<Void> copyUrl(@PathVariable String id){
+    Integer idInt=Integer.parseInt(id);
+   urlService.copyUrl(idInt);
+    return ResponseEntity.noContent().build();
+}
     @GetMapping("/")
-    @Operation(summary = "get all urls",description = "")
+    @Operation(summary="get all urls")
     public ResponseEntity<List<UrlShortened>> getAllUrls(){
         Optional<List<UrlShortened>> urls = urlService.getAllUrls();
         return urls.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-
     }
     @PostMapping("/customUrl")
     @Operation(summary="create a custom short url")
@@ -77,6 +80,4 @@ public class UrlController {
         Integer idInt = Integer.parseInt(id);
         return ResponseEntity.ok(urlService.getNumberAccessed(idInt));
     }
-
-
 }
