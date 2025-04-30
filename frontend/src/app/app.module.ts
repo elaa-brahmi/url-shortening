@@ -8,8 +8,8 @@ import { LinksComponent } from './pages/links/links.component';
 import { CustomLinksComponent } from './pages/custom-links/custom-links.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { TestComponent } from './components/test/test.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
 
 const appRoutes: Routes = [
   // Define your routes here, for example:
@@ -24,7 +24,8 @@ const appRoutes: Routes = [
     CustomLinksComponent,
     SidebarComponent,
     DashboardComponent,
-    TestComponent,
+    FooterComponent,
+
   ],
   exports: [RouterModule],
   imports: [
