@@ -17,7 +17,7 @@
           <ul>
             <li class="menu-header"><span> GENERAL </span></li>
 
-            <li class="menu-item">
+            <li class="menu-item" routerLinkActive="active">
               <a href="#" (click)="$event.preventDefault()">
                 <span class="menu-icon">
                  <i class="fa-solid fa-table-columns"></i>
@@ -26,8 +26,8 @@
               </a>
             </li>
 
-            <li class="menu-item">
-              <a href="#">
+            <li class="menu-item"  >
+              <a [routerLink]="['/links']" style="cursor: pointer;">
                 <span class="menu-icon">
                   <i class="fa-solid fa-paperclip"></i>
                 </span>

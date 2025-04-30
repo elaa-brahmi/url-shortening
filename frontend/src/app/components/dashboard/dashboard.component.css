@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  padding-right: 12%;
+  background-color: #0d0f1c;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  background-image: radial-gradient(circle, #12141d 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(to right, #3f51b5, #f50057, #7c4dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: #cfcfcf;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  background: #1a1c2c;
+  border: 1px solid #2e2e3f;
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.input-container span {
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-right: 0.5rem;
+}
+
+.input-container input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.7rem;
+}
+
+.input-container input::placeholder {
+  color: #888;
+}
+
+ button {
+  background-color: #2153f3;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #2153f3aa;
+  transition: background 0.3s;
+}
+
+ button:hover {
+  background-color: #1c45d1;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.toggle-switch {
+  width: 40px;
+  height: 20px;
+  background-color: #2a2a3b;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 2px;
+  left: 2px;
+  background: #00f;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-switch.active::after {
+  left: 22px;
+}
+
+.note {
+  color: #aaa;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.note span {
+  color: #ff3355;
+  font-weight: bold;
+}
+
+.note a {
+  color: #ddd;
+  text-decoration: underline;
+  margin: 0 4px;
+}
