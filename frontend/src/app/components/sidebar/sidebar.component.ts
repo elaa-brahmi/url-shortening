@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 export class SidebarComponent {
   constructor(private router: Router) {}
   navigateToLinks(){
-
     this.router.navigate(['/links']);
   }
   isShowDarkLight: boolean = false;

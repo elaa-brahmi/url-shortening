@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-links',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./links.component.css']
 })
 export class LinksComponent {
+    constructor(private router: Router) {}
+
 
 }

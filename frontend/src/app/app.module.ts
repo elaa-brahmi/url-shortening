@@ -26,6 +26,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     TestComponent,
   ],
+  exports: [RouterModule],
   imports: [
     BrowserModule,
     MatSidenavModule,
