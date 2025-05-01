@@ -1,0 +1,40 @@
+.custom-table {
+  background-color: #161b22;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.custom-table th, .custom-table td {
+  vertical-align: middle;
+  border: none;
+  padding: 1rem;
+}
+
+.custom-table th {
+  color: #ccc;
+  font-weight: 600;
+  background-color: #0d1117;
+}
+
+.copy-btn {
+  background-color: #21262d;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  cursor: pointer;
+}
+
+.icon-img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.table-row {
+  border-top: 1px solid #2c313a;
+}

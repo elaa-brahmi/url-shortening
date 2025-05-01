@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const appRoutes: Routes = [
   // Define your routes here, for example:
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule],
   imports: [
+    QRCodeModule,
     BrowserModule,
     MatSidenavModule,
     RouterModule.forRoot(appRoutes), //This sets up the router with your defined routes and provides routing services (like Router, ActivatedRoute, etc.) to your whole app.

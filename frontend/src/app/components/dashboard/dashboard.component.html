@@ -11,8 +11,8 @@
 
   <div class="input-container">
     <span>🔗</span>
-    <input type="text" placeholder="Enter the link here">
-    <button>Shorten Now!</button>
+    <input #input type="text" placeholder="Enter the link here">
+    <button (click)="shorten(input)">Shorten Now!</button>
   </div>
 
   <div class="toggle-container">

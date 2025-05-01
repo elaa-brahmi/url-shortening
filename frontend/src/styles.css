@@ -1,3 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "bootstrap/dist/css/bootstrap.min.css"
+
+
+/* .dark-theme {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
+
+.light-theme {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* Apply the variables globally */
+/* body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+} */
