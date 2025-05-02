@@ -11,6 +11,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { UrlShorteningApIsService } from './generatedServices/services/url-shortening-ap-is.service';
+import { ToastrModule } from 'ngx-toastr';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
+
 
 const appRoutes: Routes = [
   // Define your routes here, for example:
@@ -30,6 +34,9 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule],
   imports: [
+    ToastrModule.forRoot(),
+     // ToastrModule added
+     HttpClientModule, // super important
     QRCodeModule,
     BrowserModule,
     MatSidenavModule,
@@ -37,7 +44,9 @@ const appRoutes: Routes = [
     AppRoutingModule,
 
   ],
-  providers: [],
+  providers: [UrlShorteningApIsService
+    ,HttpClient
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 package backend.example.demo.service;
 
 import backend.example.demo.exception.NotFoundUrl;
-import backend.example.demo.exception.ShortUrlExist;
+import backend.example.demo.exception.UrlExist;
 import backend.example.demo.exception.TooManyAttempts;
 import backend.example.demo.model.UrlShortened;
 import backend.example.demo.repository.UrlRepository;
@@ -44,8 +44,8 @@ public class UrlService {
 
     }
     public void generateCustomShortenedUrl(String shortenedUrl,String originalUrl){
-        if(urlRepository.findByShortenedUrl(shortenedUrl).isPresent()){
-            throw new ShortUrlExist("this short url already exist, choose another");
+        if(urlRepository.findByShortenedUrl(shortenedUrl).isPresent() || urlRepository.findByOriginalUrl(originalUrl).isPresent()){
+            throw new UrlExist("this url already exist, choose another");
         }
         UrlShortened newUrl = UrlShortened.builder()
                 .shortenedUrl(shortenedUrl)
@@ -58,7 +58,11 @@ public class UrlService {
 
     }
     public void createUrl(String  Originalurl) throws TooManyAttempts {
+        if(urlRepository.findByOriginalUrl(Originalurl).isPresent()){
+            throw new UrlExist("this url already exist, choose another");
+        }
             String shorturl=generateRandomUrl();
+
             UrlShortened newUrl = UrlShortened.builder()
                     .shortenedUrl(shorturl)
                     .originalUrl(Originalurl)

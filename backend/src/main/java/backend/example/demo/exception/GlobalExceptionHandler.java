@@ -17,8 +17,8 @@ public class GlobalExceptionHandler {
         map.put("message", exception.getMessage());
         return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
     }
-    @ExceptionHandler({ShortUrlExist.class})
-    public ResponseEntity<Map<String, String>> handleShortUrl(ShortUrlExist exception) {
+    @ExceptionHandler({UrlExist.class})
+    public ResponseEntity<Map<String, String>> handleShortUrl(UrlExist exception) {
         Map<String, String> map = new HashMap<>();
         map.put("message", exception.getMessage());
         return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
