@@ -13,6 +13,14 @@ body {
   background-image: radial-gradient(circle, #12141d 1px, transparent 1px);
   background-size: 40px 40px;
 }
+.custom-snackbar {
+  position: absolute;
+  background-color: #f50057;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
 
 h1 {
   font-size: 3rem;

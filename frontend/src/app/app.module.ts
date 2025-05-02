@@ -14,8 +14,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { UrlShorteningApIsService } from './generatedServices/services/url-shortening-ap-is.service';
 import { ToastrModule } from 'ngx-toastr';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 const appRoutes: Routes = [
   // Define your routes here, for example:
   // { path: '', component: MainPageComponent },
@@ -23,6 +23,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
+
     AppComponent,
     MainPageComponent,
     LinksComponent,
@@ -34,7 +35,10 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule],
   imports: [
+
+    // Notyf removed from imports
     ToastrModule.forRoot(),
+    BrowserAnimationsModule,
      // ToastrModule added
      HttpClientModule, // super important
     QRCodeModule,
@@ -44,8 +48,11 @@ const appRoutes: Routes = [
     AppRoutingModule,
 
   ],
-  providers: [UrlShorteningApIsService
-    ,HttpClient
+  providers: [
+    UrlShorteningApIsService,
+    HttpClient,
+    MatSnackBar
+
   ],
   bootstrap: [AppComponent]
 })
