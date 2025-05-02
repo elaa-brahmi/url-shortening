@@ -1,4 +1,4 @@
-.custom-table {
+/* .custom-table {
   background-color: #161b22;
   border-radius: 10px;
   overflow: hidden;
@@ -37,4 +37,78 @@
 
 .table-row {
   border-top: 1px solid #2c313a;
+}
+ */
+ .table-wrapper {
+  background-color: #0f111a;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+  .table {
+    --bs-table-color-type: initial;
+    --bs-table-bg-type: initial;
+    --bs-table-color-state: initial;
+    --bs-table-bg-state: initial;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+thead {
+  background-color: #282c3f;
+}
+
+thead th {
+  text-align: left;
+  padding: 16px 12px;
+  font-weight: 600;
+  color: #b0b3c0;
+}
+
+tbody tr {
+  background-color: #141625;
+  border-bottom: 1px solid #1f2233;
+  transition: background 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #1a1d2f;
+}
+
+tbody td {
+  padding: 14px 12px;
+  vertical-align: middle;
+}
+
+.copy-btn, .status-icon {
+  background-color: #25293c;
+  border-radius: 50%;
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background-color: #2d3145;
+}
+
+.status-icon.active {
+  color: #3fcf8e;
+}
+
+.status-icon.inactive {
+  color: #f3b562;
+}
+
+.qr-code {
+  height: 40px;
+  width: 40px;
 }

@@ -5,7 +5,7 @@
 
 <div class="col-9 col-md-10" style="padding-left: 10%;padding-right: 10%;">
   <div class="container mt-5">
-    <table class="table custom-table">
+    <table class=" custom-table">
       <thead>
         <tr>
           <th>Short Link</th>
@@ -16,22 +16,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="table-row">
+        <tr class="table-row" *ngFor ="let link of links">
           <td>
-            <span>https://linkly.com/Bn41aCOlnxj</span>
-            <button class="copy-btn ms-2">
-              <i class="fa-solid fa-copy"></i>
-            </button>
+            <span> {{link.shortenedUrl}}</span>
+
           </td>
           <td>
-            <img [src]="getFaviconUrl(leetcodeLink)" width="24" height="24" alt="favicon" />
-            https://leetcode.com/explore/featured/card...
+           <span> <img [src]="getFaviconUrl(link.originalUrl)" width="24" height="24" alt="favicon" />
+           {{ link.originalUrl.substring(0,20)+
+            "..." }}
+          <button class="copy-btn ms-2" (click)="copyToClipboard(link.originalUrl)">
+            <i class="fa-solid fa-copy"></i>
+          </button>
+          </span>
           </td>
           <td>
-            <qrcode [qrdata]="leetcodeLink" [width]="90" [errorCorrectionLevel]="'M'"></qrcode>
+            <qrcode [qrdata]="link.originalUrl" [width]="90" [errorCorrectionLevel]="'M'"></qrcode>
           </td>
-          <td>1313</td>
-          <td>Oct - 10 -2023</td>
+          <td>{{ link.accessCount }}</td>
+          <td>{{ link.updatedAt ? link.updatedAt.substring(0,10) : link.createdAt.substring(0,10) }}</td>
         </tr>
        </tbody></table>
 
