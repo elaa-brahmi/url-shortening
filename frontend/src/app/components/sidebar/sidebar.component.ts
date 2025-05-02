@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from 'src/app/theme.service';
 @Component({
@@ -7,7 +7,12 @@ import { ThemeService } from 'src/app/theme.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  @Output() sidebarCollapsed = new EventEmitter<boolean>(); // EventEmitter to notify parent
   isthemeDarkLight: boolean = false;
+  isCollapsed = false;
+  isShowDarkLight: boolean = false;
+
+
   constructor(private router: Router,private themeService: ThemeService) {}
   navigateToLinks(){
     this.router.navigate(['/links']);
@@ -19,14 +24,14 @@ export class SidebarComponent {
   setLightTheme(): void {
     this.themeService.setLightTheme();
   }
-  isShowDarkLight: boolean = false;
   showdarklight():void{
     this.isShowDarkLight = !this.isShowDarkLight;
   }
-    isCollapsed = false;
-
-    toggleSidebar() {
+toggleSidebar() {
       this.isCollapsed = !this.isCollapsed;
-    }
+      this.sidebarCollapsed.emit(this.isCollapsed); // Emit the collapsed state
+      console.log('Sidebar collapsed:', this.isCollapsed);
+      console.log('Sidebar collapsed event:', this.sidebarCollapsed);
+}
 
 }

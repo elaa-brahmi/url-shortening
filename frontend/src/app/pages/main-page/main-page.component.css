@@ -1,3 +1,25 @@
 body{
-  overflow: hidden;
+  overflow-x: hidden !important;
 }
+.collapsed{
+  position:absolute;
+  top: 7%;
+    left: 8%;
+    font-weight: 900;
+    background: linear-gradient(to right, #3f51b5, #f50057, #7c4dff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.notcollapsed{
+  position:absolute;
+  top: 7%;
+    left: 18%;
+    font-weight: 900;
+    background: linear-gradient(to right, #3f51b5, #f50057, #7c4dff);
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
