@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UrlShorteningApIsService } from 'src/app/generatedServices/services/url-shortening-ap-is.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DashboardComponent {
   @ViewChild('input') input: ElementRef | undefined;
   constructor(private Shortservice:UrlShorteningApIsService,private toastr: ToastrService
-    ,private router:Router,private snackBar: MatSnackBar) {
+    ,private router:Router) {
       // Initialize any properties or services needed for the dashboard
   }
   shorten(): void {
@@ -30,17 +29,25 @@ export class DashboardComponent {
       this.Shortservice.createUrl$Response(params).subscribe(
               (response) => {
                 console.log("shortened url ",response);
-                /* this.toastr.success('URL shortened successfully!', 'Success'); */
-              // this.notyf.success('URL shortened successfully!');
-              this.snackBar.open('URL created successfully!', 'Close', {
-                duration: 40000,
-                verticalPosition: 'top',
-                horizontalPosition: 'right',
-                panelClass: ['custom-snackbar'] // Add your custom class here
-              });
+                this.toastr.success('URL shortened successfully!', 'Success');
+
               },
               (error) => {
                 console.error('Error shortening URL:', error);
+                if(error.error){
+                  const errorObject = JSON.parse(error.error);
+                  console.log('Error object:', errorObject);
+                  if(errorObject.message){
+                  const errorMessage = errorObject.message;
+                  console.log('Error message:', errorMessage);
+                  this.toastr.error(errorMessage, 'Error');
+                }
+                else if(errorObject.originalUrl){
+                  const errorMessage = errorObject.originalUrl;
+                  console.log('Error message:', errorMessage);
+                  this.toastr.error(errorMessage, 'Error');
+                }}
+
               }
             );
 
