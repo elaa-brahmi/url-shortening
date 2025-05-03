@@ -67,8 +67,8 @@ thead {
 thead th {
   text-align: left;
   padding: 16px 12px;
-  font-weight: 600;
-  color: #b0b3c0;
+  font-weight: 800;
+  color: white;
 }
 
 tbody tr {
@@ -111,4 +111,225 @@ tbody td {
 .qr-code {
   height: 40px;
   width: 40px;
+}
+
+
+
+.containerInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 270px;
+  height: 50px;
+  border-radius: 10px;
+  position: relative;
+  border: 2px solid #000000;
+}
+
+.prefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+  width: 70px;
+  font-weight: 600;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.myinput-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  font-weight: 500;
+  border: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0px 10px;
+  height: 100%;
+  width: 160px;
+  background-color: #fff;
+  font-size: 15px;
+}
+
+.link-icon {
+  font-size: 16px;
+  background-color: #fff;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  right: -10px;
+  opacity: 0;
+  background-color: #ffe53b;
+  background-image: linear-gradient(147deg, #f0f0f0 0%, #000000 74%);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 0.2s;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+  z-index: 10;
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #000000;
+  background-size: 1000%;
+  background-position: center;
+  transform: rotate(45deg);
+  bottom: -15%;
+  transition-duration: 0.3s;
+}
+
+.link-icon:hover .tooltip {
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+.show{
+  left: 270px;
+    position: relative;
+    top: -50px;
+  display: visible;
+}
+.hide{
+  display: none !important;
+}
+
+
+/* From Uiverse.io by taieb1919 */
+.customCheckBoxHolder {
+  margin: 5px;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+.customCheckBox {
+  width: 100%; /* Ensures each checkbox has the same width */
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  padding: 2px 8px;
+  background-color: rgba(0, 0, 0, 0.16);
+  border-radius: 0px;
+  color: rgba(255, 255, 255, 0.7);
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 300ms;
+  transition-property: color, background-color, box-shadow;
+  display: flex;
+  height: 32px;
+  align-items: center;
+  box-shadow:
+    rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset,
+    rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
+  outline: none;
+  justify-content: center;
+  min-width: 55px;
+}
+
+.customCheckBox:hover {
+  background-color: #2c2c2c;
+  color: white;
+  box-shadow:
+    rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset,
+    rgba(255, 255, 255, 0.17) 0px -1px 1px 0px,
+    rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
+}
+
+.customCheckBox .inner {
+  font-size: 18px;
+  font-weight: 900;
+  pointer-events: none;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 300ms;
+  transition-property: transform;
+  transform: translateY(0px);
+}
+
+.customCheckBox:hover .inner {
+  transform: translateY(-2px);
+}
+
+.customCheckBoxWrapper {
+  width: 100%; /* Ensures each wrapper takes full width of the holder */
+}
+
+/* Multiple Checkboxes can be chained together for a radio input */
+.customCheckBoxWrapper:first-of-type .customCheckBox {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-right: 0px;
+}
+
+.customCheckBoxWrapper:last-of-type .customCheckBox {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-left: 0px;
+}
+
+.customCheckBoxInput {
+  display: none;
+}
+
+/* .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox {
+  background-color: #2d6737;
+  color: white;
+  box-shadow:
+    rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset,
+    rgba(255, 255, 255, 0.17) 0px -1px 1px 0px,
+    rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
+} */
+
+.customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox .inner {
+  transform: translateY(-2px);
+}
+
+/* .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox:hover {
+  background-color: #34723f;
+  box-shadow:
+    rgba(0, 0, 0, 0.26) 0px -4px 1px 0px inset,
+    rgba(255, 255, 255, 0.17) 0px -1px 1px 0px,
+    rgba(0, 0, 0, 0.15) 0px 3px 6px 2px;
+} */
+
+.customCheckBoxWrapper .customCheckBox:hover .inner {
+  transform: translateY(-2px);
+}
+.shown{
+  display:block;
+}
+h1 {
+  margin-top:20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  background: linear-gradient(to right, #0026ff, #f50057, #5011ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

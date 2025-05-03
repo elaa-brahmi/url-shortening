@@ -16,6 +16,11 @@ import { ToastrModule } from 'ngx-toastr';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CreateCustomComponent } from './create-custom/create-custom.component';
 const appRoutes: Routes = [
   // Define your routes here, for example:
   // { path: '', component: MainPageComponent },
@@ -31,11 +36,15 @@ const appRoutes: Routes = [
     SidebarComponent,
     DashboardComponent,
     FooterComponent,
+    CreateCustomComponent,
 
   ],
   exports: [RouterModule],
   imports: [
-
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
     // Notyf removed from imports
     ToastrModule.forRoot(),
     BrowserAnimationsModule,

@@ -3,38 +3,100 @@
 
   <div class="col-3 col-md-2 " style="padding-right: 0;"><app-sidebar></app-sidebar></div>
 
-<div class="col-9 col-md-10" style="padding-left: 10%;padding-right: 10%;">
-  <div class="container mt-5">
-    <table class=" custom-table">
+<div class="col-9 col-md-10" style="padding-left: 5%;padding-right: 5%;">
+  <h1>auto-generated links</h1>
+
+  <mat-expansion-panel hideToggle style="    margin-top: 2rem;
+  width: 100%;
+  height: 100px;
+  background-color: #282c3f;">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="color: white;    padding: 10px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;">
+        short url
+      </mat-panel-title>
+      <mat-panel-description style=" color: white;    padding: 10px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;">
+        Type the short url
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field style="margin-top: 10px; color: white;" >
+      <mat-label>url</mat-label>
+      <!--The keyup.enter listens for the Enter key press.-->
+      <input style="padding-top: 10px;" matInput #shortUrl (keyup)="onKeyUp(shortUrl.value)" (keyup.enter)="search(shortUrl.value)"  placeholder="http://example.com" />
+
+    </mat-form-field>
+  </mat-expansion-panel>
+  <div class="mt-5">
+        <!-- From Uiverse.io by taieb1919 -->
+        <div class="customCheckBoxHolder" style="top: 155px;
+        width: 75px;
+        position: absolute;
+        left: 77%;
+        z-index: 22;"  [class.shown]="sortDate" [class.hide]="sortDate== false">
+          <input class="customCheckBoxInput" id="cCB1" type="radio" (change)="filterNewest()" />
+          <label class="customCheckBoxWrapper" for="cCB1">
+            <div class="customCheckBox">
+              <div class="inner">newest</div>
+            </div>
+          </label>
+
+          <input class="customCheckBoxInput" id="cCB2" type="radio" (change)="filterOldest()" />
+          <label class="customCheckBoxWrapper" for="cCB2">
+            <div class="customCheckBox">
+              <div class="inner">oldest</div>
+            </div>
+          </label>
+        </div>
+
+    <table class="custom-table">
       <thead>
         <tr>
           <th>Short Link</th>
           <th>Original Link</th>
           <th>Qrcode</th>
           <th>Clicks</th>
-          <th>Date</th>
+          <th (click)="filterNewestOldest()" style="cursor: pointer;"><span style="margin-right:12px;">Date</span><i class="fa-solid fa-sort"></i></th>
+          <th>actions</th>
         </tr>
       </thead>
       <tbody>
         <tr class="table-row" *ngFor ="let link of links">
+          <div class="containerInput" [class.show]="WillupdateLink" [class.hide]="!WillupdateLink">
+            <span class="prefix">http://</span>
+            <input #input class="myinput-link" placeholder="Site.com" />
+            <span class="link-icon">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span class="tooltip">save</span>
+            </span>
+          </div>
           <td>
-            <span> {{link.shortenedUrl}}</span>
+            <span> <span style="color:  #c14b74; font-weight:700;">
+              {{link.shortenedUrl.substring(0,15)}}</span>{{link.shortenedUrl.substring(15)}}</span>
 
           </td>
           <td>
            <span> <img [src]="getFaviconUrl(link.originalUrl)" width="24" height="24" alt="favicon" />
            {{ link.originalUrl.substring(0,20)+
             "..." }}
-          <button class="copy-btn ms-2" (click)="copyToClipboard(link.originalUrl)">
-            <i class="fa-solid fa-copy"></i>
+          <button class="copy-btn ms-2" (click)="copyToClipboard(link.originalUrl,link.id)">
+            <i class="fa-solid fa-copy" style="color:white;"></i>
           </button>
           </span>
           </td>
           <td>
-            <qrcode [qrdata]="link.originalUrl" [width]="90" [errorCorrectionLevel]="'M'"></qrcode>
+            <qrcode [qrdata]="link.originalUrl" [width]="90" [errorCorrectionLevel]="'M'"  [colorDark]="'#ffffff'"
+            [colorLight]="'#141625'"></qrcode>
           </td>
           <td>{{ link.accessCount }}</td>
           <td>{{ link.updatedAt ? link.updatedAt.substring(0,10) : link.createdAt.substring(0,10) }}</td>
+        <td><span><i class="mx-4 fa-solid fa-pen" style="cursor:pointer;" (click)="updateLink(link.id)"></i><i class="fa-solid fa-trash" style="cursor:pointer;" (click)="deleteLink(link.id)"></i></span></td>
+
         </tr>
        </tbody></table>
 

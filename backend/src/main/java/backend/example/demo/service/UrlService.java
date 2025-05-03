@@ -80,16 +80,15 @@ public class UrlService {
 
     }
     public Optional<UrlShortened> getUrlFromShortenedUrl(String shortenedUrl){
-         Optional<UrlShortened> original =urlRepository.findByShortenedUrl(shortenedUrl);
-         if(original.isPresent()){
-             UrlShortened urlShortened=original.get();
-             urlShortened.setAccessCount(original.get().getAccessCount()+1);
+       Optional<UrlShortened> url =urlRepository.findByShortenedUrlContainingIgnoreCase(shortenedUrl);
+         if(url.isPresent()){
+             UrlShortened urlShortened=url.get();
              urlRepository.save(urlShortened);
          }
          else{
              throw new NotFoundUrl("Url not found for shortened url: "+shortenedUrl);
          }
-         return original;
+         return url;
     }
 
     public UrlShortened updateShortUrl(String originalUrl, Integer urlId){
@@ -103,7 +102,7 @@ public class UrlService {
 
     }
     public Optional<List<UrlShortened>> getAllUrls(){
-        List<UrlShortened> urls=urlRepository.findAll();
+        List<UrlShortened> urls=urlRepository.findAllOrderByUpdatedOrCreatedDesc();
         if(urls.isEmpty()){
             throw new NotFoundUrl("no urls found");
         }

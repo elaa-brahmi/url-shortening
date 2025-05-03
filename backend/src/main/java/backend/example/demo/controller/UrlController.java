@@ -55,8 +55,8 @@ public ResponseEntity<Void> copyUrl(@PathVariable String id){
     @GetMapping("/GetOriginal")
     @Operation(summary="get an original url")
     public ResponseEntity<UrlShortened> getOriginalUrl(@RequestParam String shortUrl){
-        Optional<UrlShortened> original=urlService.getUrlFromShortenedUrl(shortUrl);
-        return original.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<UrlShortened> url=urlService.getUrlFromShortenedUrl(shortUrl);
+        return url.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
     }
     @PutMapping("/update/{id}")
