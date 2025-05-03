@@ -13,7 +13,7 @@ export class SidebarComponent {
   isShowDarkLight: boolean = false;
 
 
-  constructor(private router: Router,private themeService: ThemeService) {}
+  constructor(public router: Router,private themeService: ThemeService) {}
   navigateToLinks(){
     this.router.navigate(['/links']);
   }

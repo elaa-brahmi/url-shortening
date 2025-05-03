@@ -9,7 +9,6 @@ import { UrlShorteningApIsService } from 'src/app/generatedServices/services/url
 })
 export class CustomLinksComponent {
     @ViewChild('input') inputElement!: ElementRef;
-    @ViewChild('custom') customElement!: ElementRef;
 
     @ViewChild('shortUrl') shortUrlInput!: ElementRef;
     links:any[] = [];
@@ -153,28 +152,7 @@ export class CustomLinksComponent {
 
         this.links.reverse();
       }
-      shortenCustom(originalUrl,shortUrl):void{
-        const url=this.customElement.nativeElement.value;
-        const customUrlRequest={
-          originalUrl: originalUrl,
-          shortUrl: shortUrl
-        }
-        const params={
-          body:customUrlRequest
-        };
-        this.linkService.createCustomUrl$Response(params).subscribe({
-          next: (response) => {
-            console.log("created custom link ",response.body);
-            this.toastr.success('Custom link created successfully!', 'Success');
-            this.getLinks();
-          },
-          error: (error) => {
-            console.error('Error creating custom link:', error);
-            this.toastr.error('Failed to create custom link', 'Error');
-          }
-        });
-        this.inputElement.nativeElement.value = '';
-        }
+
 
 
 
