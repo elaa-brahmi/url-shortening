@@ -40,7 +40,7 @@ public class UrlService {
 
 
         }while(urlRepository.findByShortenedUrl(shorturl).isPresent());
-        return "https://TrimUrl/"+shorturl;
+        return "TrimUrl/"+shorturl;
 
     }
     public void generateCustomShortenedUrl(String shortenedUrl,String originalUrl){
@@ -48,7 +48,7 @@ public class UrlService {
             throw new UrlExist("this url already exist, choose another");
         }
         UrlShortened newUrl = UrlShortened.builder()
-                .shortenedUrl("https://TrimUrl/"+shortenedUrl)
+                .shortenedUrl("TrimUrl/"+shortenedUrl)
                 .originalUrl(originalUrl)
                 .accessCount(0)
                 .createdAt(LocalDateTime.now())
@@ -78,6 +78,10 @@ public class UrlService {
         urlRepository.save(url);
 
 
+    }
+    public UrlShortened getUrlByShortenedUrl(String shortenedUrl){
+        Optional<UrlShortened> url=urlRepository.findByShortenedUrl(shortenedUrl);
+        return url.orElse(null);
     }
     public Optional<UrlShortened> getUrlFromShortenedUrl(String shortenedUrl){
        Optional<UrlShortened> url =urlRepository.findByShortenedUrlContainingIgnoreCase(shortenedUrl);

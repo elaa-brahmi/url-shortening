@@ -24,13 +24,20 @@ import java.util.Optional;
 @Validated
 public class UrlController {
     private final UrlService urlService;
-@PostMapping("/copy/{id}")
-@Operation(summary="copy url to clipboard")
-public ResponseEntity<Void> copyUrl(@PathVariable String id){
-    Integer idInt=Integer.parseInt(id);
-   urlService.copyUrl(idInt);
-    return ResponseEntity.noContent().build();
-}
+    @GetMapping("/getById/{shortUrl}")
+    @Operation(summary="get an url by shortUrl")
+    public ResponseEntity<UrlShortened> getByShortUrl (@PathVariable String shortUrl){
+        UrlShortened url=urlService.getUrlByShortenedUrl(shortUrl);
+        return ResponseEntity.ok(url);
+    }
+
+    @PostMapping("/copy/{id}")
+    @Operation(summary="copy url to clipboard")
+    public ResponseEntity<Void> copyUrl(@PathVariable String id){
+        Integer idInt=Integer.parseInt(id);
+       urlService.copyUrl(idInt);
+        return ResponseEntity.noContent().build();
+    }
     @GetMapping("/")
     @Operation(summary="get all urls")
     public ResponseEntity<List<UrlShortened>> getAllUrls(){
