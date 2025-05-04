@@ -24,9 +24,11 @@ import java.util.Optional;
 @Validated
 public class UrlController {
     private final UrlService urlService;
-    @GetMapping("/getById/{shortUrl}")
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getById")
     @Operation(summary="get an url by shortUrl")
-    public ResponseEntity<UrlShortened> getByShortUrl (@PathVariable String shortUrl){
+    public ResponseEntity<UrlShortened> getByShortUrl (@RequestParam String shortUrl){
         UrlShortened url=urlService.getUrlByShortenedUrl(shortUrl);
         return ResponseEntity.ok(url);
     }
