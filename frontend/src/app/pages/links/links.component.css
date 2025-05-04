@@ -336,3 +336,7 @@ h1 {
 .blur{
   opacity: 0.2;
 }
+.collapseSideBar{
+  position: relative;
+  right:100px;
+}

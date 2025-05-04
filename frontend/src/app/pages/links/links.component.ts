@@ -18,6 +18,7 @@ export class LinksComponent {
   sortDate: boolean = false;
   isVisible = true;
   WillupdateLink:boolean=false;
+  sidebarCollapsed = false;
   ngOnInit(){
     this.getLinks();
   }
@@ -152,6 +153,15 @@ export class LinksComponent {
       console.log("sortDateDesc ",this.sortDateDesc);
 
       this.links.reverse();
+    }
+    oncloseupdate(event: boolean): void {
+      if(event==true){
+      this.WillupdateLink=false;}
+
+    }
+    handleSidebarCollapsed(collapsed: boolean): void {
+      this.sidebarCollapsed = collapsed;
+
     }
 
 

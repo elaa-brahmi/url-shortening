@@ -4,6 +4,7 @@
 
 body{
   overflow-x: hidden !important;
+  background-color: #0d0f1c !important;
 }
 /* General Toast Styling */
 .toast {

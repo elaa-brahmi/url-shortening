@@ -1,9 +1,9 @@
 
-<div class="row" style="  background-color: #0d0f1c;" >
+<div class="row" style="height:100vh; overflow-y: hidden;  background-color: #0d0f1c;" >
 
-  <div class="col-3 col-md-2 " style="padding-right: 0;"><app-sidebar (sidebarCollapsed)="onSideBarCollapsed($event)"></app-sidebar></div>
+  <div class="col-3 col-md-2 " style="padding-right: 0;"><app-sidebar style="height:100%" (sidebarCollapsed)="onSideBarCollapsed($event)"></app-sidebar></div>
 
-<div class="col-9 col-md-10" style="padding-left: 5%;padding-right: 5%;">
+<div class="col-9 col-md-10 mb-5" style="height: 80vh;padding-left: 5%;padding-right: 5%; ">
   <span [class.collapsed]="isCollapsed">
     <i class="fa-solid fa-arrow-right"></i>
   <h1>customize your link</h1>
@@ -11,18 +11,18 @@
 	<form class="form">
 		<div class="input-group mb-3">
 			<label for="username">url</label>
-			<input #url type="text" name="url" id="url" placeholder="">
+			<input #url type="text" name="url" id="url" placeholder="http://example.com" required>
 		</div>
 		<div class="input-group mb-3">
 			<label for="password">custom name</label>
-			<input #short type="text" name="custom" id="custom" placeholder="">
+			<input #short type="text" name="custom" id="custom" placeholder="" required>
 
 		</div>
 		<button class="sign" style="margin-top:20px;" (click)="shortenCustom()">save</button>
 	</form></div></span></div>
   <router-outlet></router-outlet>
   <app-footer style="position: relative;
-
+      height: 20vh;
   left: 0;
   right: 0;
   z-index: 2;"></app-footer>

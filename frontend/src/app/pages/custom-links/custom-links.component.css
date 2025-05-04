@@ -334,3 +334,10 @@ h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
+.blur{
+  opacity: 0.2;
+}
+.collapseSideBar{
+  position: relative;
+  right:100px;
+}

@@ -98,6 +98,7 @@ public class UrlService {
     public UrlShortened updateShortUrl(String originalUrl, Integer urlId){
         Optional<UrlShortened> original =urlRepository.findById(urlId);
         if(original.isPresent()){
+
             original.get().setOriginalUrl(originalUrl);
             original.get().setUpdatedAt(LocalDateTime.now());
             return urlRepository.save(original.get());

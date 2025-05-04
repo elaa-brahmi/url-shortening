@@ -9,6 +9,7 @@ import { UrlShorteningApIsService } from 'src/app/generatedServices/services/url
 })
 export class CustomLinksComponent {
     @ViewChild('input') inputElement!: ElementRef;
+    selectedshortUrl: string = '';
 
     @ViewChild('shortUrl') shortUrlInput!: ElementRef;
     links:any[] = [];
@@ -17,6 +18,8 @@ export class CustomLinksComponent {
     sortDate: boolean = false;
     isVisible = true;
     WillupdateLink:boolean=false;
+  sidebarCollapsed = false;
+
     ngOnInit(){
       this.getLinks();
     }
@@ -73,12 +76,10 @@ export class CustomLinksComponent {
 
 
       }
-      updateLink(linkId: string): void {
-        const param={
-          id:linkId
-        }
-       /*  this.router.navigate(['/update-link', linkId]); */
+      updateLink(shortUrl: string): void {
         this.WillupdateLink=true;
+        this.selectedshortUrl = shortUrl;
+        console.log("selected link id ",this.selectedshortUrl);
       }
       deleteLink(linkId: string): void {
         const param={
@@ -156,6 +157,14 @@ export class CustomLinksComponent {
 
 
 
+      oncloseupdate(event: boolean): void {
+        if(event==true){
+        this.WillupdateLink=false;}
 
+      }
+      handleSidebarCollapsed(collapsed: boolean): void {
+        this.sidebarCollapsed = collapsed;
+
+      }
 
 }

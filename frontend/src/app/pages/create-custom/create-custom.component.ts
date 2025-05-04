@@ -34,7 +34,21 @@ export class CreateCustomComponent {
       },
       error: (error) => {
         console.error('Error creating custom link:', error);
-        this.toastr.error('Failed to create custom link', 'Error');
+        //this.toastr.error('Failed to create custom link', 'Error');
+        if(error.error){
+          const errorObject = JSON.parse(error.error);
+          console.log('Error object:', errorObject);
+          if(errorObject.shortUrl){
+          const errorMessage = errorObject.shortUrl;
+          console.log('Error message:', errorMessage);
+          this.toastr.error(errorMessage, 'Error');
+        }
+        else if(errorObject.originalUrl){
+          const errorMessage = errorObject.originalUrl;
+          console.log('Error message:', errorMessage);
+          this.toastr.error(errorMessage, 'Error');
+        }
+      }
       }
     });
 
