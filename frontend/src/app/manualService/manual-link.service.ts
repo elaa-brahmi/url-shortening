@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UrlShortened } from '../generatedServices/models/url-shortened';
 
@@ -13,8 +13,9 @@ export class ManualLinkService {
   constructor(private http: HttpClient) {}
 
   getByShortUrl(shortUrl: string): Observable<UrlShortened> {
-    const url = `${this.basePath}/getById/${encodeURIComponent(shortUrl)}`;
-    return this.http.get<UrlShortened>(url);
+    const url = `${this.basePath}/getById`;
+    const params = new HttpParams().set('shortUrl', shortUrl); // for @requestParam
+    return this.http.get<UrlShortened>(url, { params });
   }
 
 }
