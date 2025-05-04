@@ -11,6 +11,7 @@ import { UrlShorteningApIsService } from 'src/app/generatedServices/services/url
 export class LinksComponent {
   @ViewChild('input') inputElement!: ElementRef;
   @ViewChild('shortUrl') shortUrlInput!: ElementRef;
+  selectedshortUrl: string = '';
   links:any[] = [];
   sortDateAsc: boolean = false;
   sortDateDesc: boolean = false;
@@ -73,12 +74,12 @@ export class LinksComponent {
 
 
     }
-    updateLink(linkId: string): void {
-      const param={
-        id:linkId
-      }
-     /*  this.router.navigate(['/update-link', linkId]); */
+    updateLink(shortUrl: string): void {
       this.WillupdateLink=true;
+      this.selectedshortUrl = shortUrl;
+      console.log("selected link id ",this.selectedshortUrl);
+
+
     }
     deleteLink(linkId: string): void {
       const param={

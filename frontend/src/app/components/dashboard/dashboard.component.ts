@@ -30,6 +30,7 @@ export class DashboardComponent {
               (response) => {
                 console.log("shortened url ",response);
                 this.toastr.success('URL shortened successfully!', 'Success');
+                this.router.navigate(['/links', response]);
 
               },
               (error) => {

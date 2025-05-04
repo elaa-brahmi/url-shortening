@@ -1,9 +1,18 @@
 
 <div class="row" style="  background-color: #0d0f1c;" >
 
-  <div class="col-3 col-md-2 " style="padding-right: 0;"><app-sidebar></app-sidebar></div>
 
-<div class="col-9 col-md-10" style="padding-left: 5%;padding-right: 5%;">
+<div *ngIf="WillupdateLink && selectedshortUrl" [class.hide]="!WillupdateLink"  style="position: absolute; top:5%;
+margin:auto;
+    z-index: 100;">
+ <app-update [shortUrl]="selectedshortUrl"></app-update>
+</div>
+
+
+
+  <div [class.blur]="WillupdateLink" class="col-3 col-md-2 " style="padding-right: 0;"><app-sidebar></app-sidebar></div>
+
+<div [class.blur]="WillupdateLink" class="col-9 col-md-10" style="padding-left: 5%;padding-right: 5%;">
   <h1>auto-generated links</h1>
 
   <mat-expansion-panel hideToggle style="    margin-top: 2rem;
@@ -67,14 +76,7 @@
       </thead>
       <tbody>
         <tr class="table-row" *ngFor ="let link of links">
-          <div class="containerInput" [class.show]="WillupdateLink" [class.hide]="!WillupdateLink">
-            <span class="prefix">http://</span>
-            <input #input class="myinput-link" placeholder="Site.com" />
-            <span class="link-icon">
-              <i class="fa-solid fa-floppy-disk"></i>
-              <span class="tooltip">save</span>
-            </span>
-          </div>
+
           <td>
             <span> <span style="color:  #c14b74; font-weight:700;">
               {{link.shortenedUrl.substring(0,15)}}</span>{{link.shortenedUrl.substring(15)}}</span>
@@ -95,7 +97,7 @@
           </td>
           <td>{{ link.accessCount }}</td>
           <td>{{ link.updatedAt ? link.updatedAt.substring(0,10) : link.createdAt.substring(0,10) }}</td>
-        <td><span><i class="mx-4 fa-solid fa-pen" style="cursor:pointer;" (click)="updateLink(link.id)"></i><i class="fa-solid fa-trash" style="cursor:pointer;" (click)="deleteLink(link.id)"></i></span></td>
+        <td><span><i class="mx-4 fa-solid fa-pen" style="cursor:pointer;" (click)="updateLink(link.shortenedUrl)"></i><i class="fa-solid fa-trash" style="cursor:pointer;" (click)="deleteLink(link.id)"></i></span></td>
 
         </tr>
        </tbody></table>

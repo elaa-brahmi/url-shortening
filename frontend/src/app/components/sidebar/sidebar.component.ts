@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThemeService } from 'src/app/theme.service';
+import { ThemeService } from 'src/app/manualService/theme.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
