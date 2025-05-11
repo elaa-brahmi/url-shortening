@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,10 +22,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateCustomComponent } from './pages/create-custom/create-custom.component';
 import { UpdateComponent } from './pages/update/update.component';
+import { KeycloakService } from './manualService/keycloak/keycloak.service';
 const appRoutes: Routes = [
   // Define your routes here, for example:
   // { path: '', component: MainPageComponent },
 ];
+
+export function kcFactory(kcService: KeycloakService) {
+  return () =>  kcService.init();
+
+}
+
 
 @NgModule({
   declarations: [
@@ -60,6 +67,13 @@ const appRoutes: Routes = [
 
   ],
   providers: [
+    {
+      provide:APP_INITIALIZER,//APP_INITIALIZER is a special token that Angular uses to run functions before the app is fully initialized.
+      deps:[KeycloakService], //dependency injection
+      useFactory:kcFactory,
+      multi:true
+
+    },
     UrlShorteningApIsService,
     HttpClient,
     MatSnackBar
