@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CreateCustomComponent } from './pages/create-custom/create-custom.component';
 import { UpdateComponent } from './pages/update/update.component';
 import { KeycloakService } from './manualService/keycloak/keycloak.service';
+import { HttpTokenService } from './manualService/interceptor/http-token.service';
 const appRoutes: Routes = [
   // Define your routes here, for example:
   // { path: '', component: MainPageComponent },
@@ -67,6 +68,11 @@ export function kcFactory(kcService: KeycloakService) {
 
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,// is a special Angular injection token used to register HTTP interceptors.
+      useClass: HttpTokenService, //Angular knows that the HttpTokenService should be used to intercept HTTP requests.
+      multi: true
+    },
     {
       provide:APP_INITIALIZER,//APP_INITIALIZER is a special token that Angular uses to run functions before the app is fully initialized.
       deps:[KeycloakService], //dependency injection
